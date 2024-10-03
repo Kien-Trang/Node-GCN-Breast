@@ -6,7 +6,7 @@ The main packages for this project:
 
 ## Preparation
 
-The given dataset and processed data used in this work can be download from this [link](https://forms.gle/bLxGb5SEpdLCUChQ7). Please put them as the following structure:
+The given dataset and processed data used in this work can be download from this [link](https://forms.gle/bLxGb5SEpdLCUChQ7). Please create and put them as the following structure:
 
 ```
 node-GCN-breast
