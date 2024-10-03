@@ -38,7 +38,7 @@ node-GCN-breast
 └── README.md
 
 ```
-
+`** Note that`: each k folder can be downloaded and tested seperately, due to the extraction from zip file may take longer time.
 
 ## Step-by-step for running code
 #### 1) Running Graph-construct-v4-Patch-building.ipynb
