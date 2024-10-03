@@ -6,19 +6,79 @@ The main packages for this project:
 
 ## Preparation
 
-## Step-by-step running code
+The given dataset and processed data used in this work can be download from this [link](https://forms.gle/bLxGb5SEpdLCUChQ7). Please put them as the following structure:
+
+```
+node-GCN-breast
+├── Dataset
+│       ├── BUSBRA
+│       |       ├── data-edge
+│       |       |         ├── k2
+│       |       |         ├── k4
+│       |       |         ├── k6
+│       |       |         └── k8
+│       |       | 
+│       |       └── original
+|       |
+│       └── BUSI-with-GT
+│               ├── data-edge
+│               |         ├── k2
+│               |         ├── k4
+│               |         ├── k6
+│               |         └── k8
+│               | 
+│               └── original
+|                 
+├── dataloader.py
+├── Graph-construct-v4-node-attr.ipynb
+├── Graph-construct-v4-Patch-building.ipynb
+├── models.py
+├── Node-classify-and-Img-Classify.ipynb
+├── utils.py
+└── README.md
+
+```
+
+
+## Step-by-step for running code
 #### 1) Running Graph-construct-v4-Patch-building.ipynb
 
-Setting the directory for input mask and output patch, the defaults setting are as follows:
+
+
+Setting the `dataset_name`, note that `dataset_name` can be `BUSI-with-GT` or `BUSBRA`.The number of `k` can be `2`, `4`, `6`, `8`. An example of `k` is as follows:
+```python
+# Selecting dataset and k
+dataset_name = 'BUSI-with-GT'  # 'BUSI-with-GT' or  'BUSBRA' 
+k = 6  # '2' '4' '6' '8'
+```
+
+The output of this file will generate in the two folder:
+1. the raw folder, under the directory: 
+```bash
+./Dataset/<name of dataset>/data-edge/<train or test>/<number of k>/raw
+```
+* `<name of dataset>`: can be `BUSBRA` or `BUSI-with-GT`
+* `<number of k>`: can be `k2`, `k4`, `k6`, `k8`
+* `<train or test>`: can be `train` or `test`
+Example: `./Dataset/BUSI-with-GT/data-edge/k6/train/raw`
+
+2. the patch-image folder, under the directory: 
+```bash
+./Dataset/<name of dataset>/data-edge/<train or test>/<number of k>/patch-image
+```
+* `<name of dataset>`: can be `BUSBRA` or `BUSI-with-GT`
+* `<number of k>`: can be `k2`, `k4`, `k6`, `k8`
+* `<train or test>`: can be `train` or `test`
+Example: `./Dataset/BUSI-with-GT/data-edge/k6/train/patch-image`
+
+`**Note that:` The structure is similar to process the test folder (in the below cell)
+
+##### [OPTIONAL] For manually setting the path
+
+However, Setting the directory for input mask and output patch, the defaults setting are as follows:
 ```python
 mask_dir = 'Dataset/BUSI-with-GT/original/Masks/'
 patch_dir  = 'Dataset/BUSI-with-GT/data-edge/train/patch-image/'
-```
-
-Setting the number of `k`, note that `k` can be `2, 4, 6, 8`. An example of `k` is as follows:
-```python
-# Selecting k
-k = 6
 ```
 
 In the working directories, the default settings are as follows:
@@ -31,47 +91,49 @@ normal_dir  = 'Dataset/BUSI-with-GT/original/train/normal'
 ```
 Please specify the directory to each corresponding folder in case of other defined paths.
 
-The output of this file will generate in the two folder:
-1. the raw folder, under the directory: 
-```bash
-./Dataset/<name of dataset>/data-edge/<train or test>/<number of k>/raw
-```
-* `<name of dataset>`: can be `BUSBRA` or `BUSI-with-GT`
-* `<number of k>`: can be `k3`, `k5`, `k7`, `k9`
-* `<train or test>`: can be `train` or `test`
-Example: `./Dataset/BUSI-with-GT/data-edge/k7/train/raw`
 
-2. the patch-image folder, under the directory: 
-```bash
-./Dataset/<name of dataset>/data-edge/<train or test>/<number of k>/patch-image
-```
-* `<name of dataset>`: can be `BUSBRA` or `BUSI-with-GT`
-* `<number of k>`: can be `k3`, `k5`, `k7`, `k9`
-* `<train or test>`: can be `train` or `test`
-Example: `./Dataset/BUSI-with-GT/data-edge/k7/train/patch-image`
-
-`**Note that:` The structure is similar to process the test folder (in the below cell)
 
 
 #### 2) Running Graph-construct-v4-node-attr.ipynb
 
-Setting the directory for forming a node attributes(features). Note that this part will continue to process the previous part, the directory should be the same as previous one. 
-The example setting is:
+Setting the option for forming a node attributes(features). Note that this part will continue to process the previous part, the directory should be the same as previous one. 
+
+
+Setting the `dataset_name`, note that `dataset_name` can be `BUSI-with-GT` or `BUSBRA`.The number of `k` can be `2`, `4`, `6`, `8`. An example of `k` is as follows:
 ```python
-patch_dir  = 'Dataset/BUSI-with-GT/data-edge/k7/'
-folder = 'train'
+# Selecting dataset and k
+dataset_name = 'BUSI-with-GT'  # 'BUSI-with-GT' or  'BUSBRA' 
+k = 6  # '2' '4' '6' '8'
 ```
+
+
 
 The output of this part is `train_node_attributes.txt`, which is stored as the same directory of the previous part.
 
 `**Note that:` The structure is similar to process the test folder (in the below cell)
 
+##### [OPTIONAL] For manually setting the path
+The example setting is:
+```python
+patch_dir  = 'Dataset/BUSI-with-GT/data-edge/k6/'
+folder = 'train'
+```
+
 #### 3) Running Node-classify-and-Img-Classify.ipynb
 
-Setting the directory for training the node and for image classification
+Setting the option directory for training the node and for image classification
+
+Setting the `dataset_name`, note that `dataset_name` can be `BUSI-with-GT` or `BUSBRA`.The number of `k` can be `2`, `4`, `6`, `8`. An example of `k` is as follows:
+```python
+# Selecting dataset and k
+dataset_name = 'BUSI-with-GT'  # 'BUSI-with-GT' or  'BUSBRA' 
+k = 6  # '2' '4' '6' '8'
+```
+
+Or can be adjust manually as follows:
 
 ```python
-root_path = 'Dataset/BUSI-with-GT/data-edge/k7/'
+root_path = 'Dataset/BUSI-with-GT/data-edge/k6/'
 mask_dir = 'Dataset/BUSI-with-GT/original/Masks/'
 base_dir = 'Dataset/BUSI-with-GT/original/test/'
 ```
