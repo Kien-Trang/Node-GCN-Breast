@@ -139,3 +139,8 @@ base_dir = 'Dataset/BUSI-with-GT/original/test/'
 ```
 
 For the `root_path` can be adjust the dataset and number of k similar to the previous ones. The `mask_dir` and `base_dir` is storing the Masks and test set of orignal corresponding dataset (can be BUSBRA or BUSI-with-GT)
+
+
+### Copyright Claim Statement
+
+This repository contains code associated with the manuscript titled "Node-Based Graph Convolutional Network with SLIC Method for Breast Cancer Ultrasound Images Classification" (Manuscript ID: Access-2024-25782) submitted for review to IEEE Access journal. The code is uploaded for review purposes only and is not for commercial use or redistribution. This repository and its contents are intended exclusively for the reviewers of the IEEE Access journal to aid in the evaluation of the manuscript and are confidential.
